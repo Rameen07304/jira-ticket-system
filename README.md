@@ -24,7 +24,6 @@ A Django-based ticket management system with role-based access for admins and re
 
 ## Project Structure
 ```text
-PP/
 ├── core/                     # Django settings, root URLs, WSGI
 ├── tickets/                  # Ticket management app
 │   ├── templates/            # Ticket-related HTML templates
@@ -42,7 +41,7 @@ PP/
 ### 1. Clone the repository
 ```bash
 git clone <your-repo-url>
-cd PP
+
 ```
 
 ### 2. Create and activate virtual environment
@@ -58,7 +57,7 @@ source venv/bin/activate
 
 ### 3. Install dependencies
 ```bash
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Set up environment variables
