@@ -23,15 +23,20 @@ A Django-based ticket management system with role-based access for admins and re
 - **Auth:** Django built-in authentication
 
 ## Project Structure
+```text
 PP/
-├── core/                          → Django settings, root URLs, wsgi
-├── tickets/                       → Ticket management app
-│   ├── templates/                 → Ticket-related HTML templates
-│   └── static/tickets/            → Ticket-specific CSS
-├── account/                       → User auth and profile app
-│   ├── templates/                 → Auth/profile HTML templates
-│   └── static/account/            → Account-specific CSS and JS
-└── templates/                     → Shared base template (base.html)
+├── core/                     # Django settings, root URLs, WSGI
+├── tickets/                  # Ticket management app
+│   ├── templates/            # Ticket-related HTML templates
+│   └── static/
+│       └── tickets/          # Ticket-specific CSS
+├── account/                  # User authentication and profile app
+│   ├── templates/            # Authentication/profile HTML templates
+│   └── static/
+│       └── account/          # Account-specific CSS and JS
+└── templates/                # Shared base template (base.html)
+```
+
 ## Setup & Installation
 
 ### 1. Clone the repository
