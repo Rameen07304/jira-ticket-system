@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile Details{% endblock %}
+
+{% block content %}
+<div class="view-container">
+    <h2>User Profile Details</h2>
+    <p><strong>Name:</strong> {{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
+    <p><strong>Address:</strong> {{ profile.address }}</p>
+    <p><strong>City:</strong> {{ profile.get_city_display }}</p>
+    <p><strong>Country:</strong> {{ profile.get_country_display }}</p>
+    <p><strong>Pincode:</strong> {{ profile.pincode }}</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

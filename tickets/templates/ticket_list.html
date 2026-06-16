@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Tickets{% endblock %}
+
+{% block content %}
+<h2>Add Tickets</h2>
+
+<!-- Add Ticket Form -->
+<form method="post" class="mb-4 border p-3 rounded bg-light">
+    {% csrf_token %}
+    <div class="mb-2">
+        <label>Subject</label>
+        <input type="text" name="subject" class="form-control" required>
+    </div>
+    <div class="mb-2">
+        <label>Description</label>
+        <textarea name="description" class="form-control" required></textarea>
+    </div>
+    <div class="mb-2">
+        <label>Status</label>
+        {{ form.status }}
+    </div>
+    <div class="mb-2">
+        <label>Priority</label>
+        {{ form.priority}}
+    </div>
+    <button type="submit" name="add_ticket" class="btn btn-success">Add Ticket</button>
+</form>
+<h2>Backlog</h2>
+<!-- Ticket Table -->
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Status</th>
+             <th>Priority</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.subject }}</td>
+            <td>{{ ticket.description }}</td>
+            <td>
+                <!-- Update status form -->
+                <form method="post" action="{% url 'update_ticket_status' ticket.id %}" class="d-flex">
+                    {% csrf_token %}
+                    <select name="status" class="form-select me-2">
+                        {% for val, name in form.fields.status.choices %}
+                            <option value="{{ val }}" {% if ticket.status == val %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-dark"onclick="return confirm('Are you sure you want to update the status of  this ticket?');">Update</button>
+                </form>
+            </td>
+            <td>
+    <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="d-flex">
+        {% csrf_token %}
+        <select name="priority" class="form-select me-2">
+            {% for val, name in form.fields.priority.choices %}
+                <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+                    <button type="submit" class="btn btn-sm btn-dark"onclick="return confirm('Are you sure you want to update the priority of  this ticket?');">Update</button>
+    </form>
+</td>
+            <td>{{ ticket.created_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ ticket.updated_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                <!-- Delete button -->
+                <form method="post" action="{% url 'delete_ticket' ticket.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="6" class="text-center">No tickets found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

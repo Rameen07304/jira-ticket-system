@@ -1,0 +1,75 @@
+/* ===== USER LIST (home.html) ===== */
+.search-bar {
+    float: right;
+    margin-bottom: 10px;
+}
+
+.search-bar input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-icons a {
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.view  { color: #3498db; }
+.edit  { color: #f39c12; }
+.delete { color: #e74c3c; }
+
+/* ===== PAGINATION ===== */
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination span,
+.pagination a {
+    padding: 6px 12px;
+    margin: 0 3px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+}
+
+.pagination .current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* ===== GENERAL TABLE ===== */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table th,
+.custom-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-table th {
+    background-color: #f2f2f2;
+}

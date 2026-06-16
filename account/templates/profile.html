@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Profile</h2>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>First name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email address:</strong> {{ user.email }}</p>
+
+    {% if profile %}
+        <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
+        <p><strong>City:</strong> {{ profile.get_city_display }}</p>
+        <p><strong>Country:</strong> {{ profile.get_country_display }}</p>
+        <p><strong>Pincode:</strong> {{ profile.pincode }}</p>
+        <p><strong>Address:</strong> {{ profile.address }}</p>
+    {% else %}
+        <p><em>No extended profile available (Admin or missing record).</em></p>
+    {% endif %}
+
+    <div class="actions">
+        <a href="{% url 'update_profile' %}">Edit</a>
+        <a href="{% url 'delete_profile' %}">Delete</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</div>
+{% endblock %}
