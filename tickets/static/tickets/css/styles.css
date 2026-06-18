@@ -73,3 +73,150 @@
 .custom-table th {
     background-color: #f2f2f2;
 }
+/* ===== DASHBOARD ===== */
+.dashboard-header {
+    margin-bottom: 32px;
+}
+
+.dashboard-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1E1B4B;
+    margin-bottom: 4px;
+}
+
+.dashboard-subtitle {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.user-section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E5E7EB;
+    margin-bottom: 16px;
+}
+
+/* ===== KANBAN COLUMNS ===== */
+.kanban-column {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.kanban-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid #E5E7EB;
+    background-color: #ffffff;
+}
+
+.kanban-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #374151;
+}
+
+.kanban-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #F3F4F6;
+    color: #6B7280;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* Column top border accent */
+.kanban-todo {
+    border-top: 3px solid #6366F1;
+}
+
+.kanban-inprogress {
+    border-top: 3px solid #F59E0B;
+}
+
+.kanban-done {
+    border-top: 3px solid #10B981;
+}
+
+.kanban-body {
+    padding: 12px;
+    min-height: 140px;
+    background-color: #F9FAFB;
+}
+
+.kanban-empty {
+    color: #9CA3AF;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 28px 0;
+}
+
+/* ===== TICKET CARDS ===== */
+.ticket-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid #E5E7EB;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.1s;
+}
+
+.ticket-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+.ticket-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.ticket-id {
+    font-size: 0.72rem;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+.ticket-subject {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+/* ===== PRIORITY BADGES ===== */
+.priority-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.priority-high {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+.priority-medium {
+    background-color: #FEF3C7;
+    color: #D97706;
+}
+
+.priority-low {
+    background-color: #D1FAE5;
+    color: #059669;
+}

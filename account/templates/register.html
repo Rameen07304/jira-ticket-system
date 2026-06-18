@@ -3,22 +3,27 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="form-container">
-    <h2>Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.username.label_tag }} {{ form.username }}
-        {{ form.password.label_tag }} {{ form.password }}
-        {{ form.email.label_tag }} {{ form.email }}
-        {{ form.first_name.label_tag }} {{ form.first_name }}
-        {{ form.last_name.label_tag }} {{ form.last_name }}
-        {{ form.dob.label_tag }} {{ form.dob }}
-        {{ form.city.label_tag }} {{ form.city }}
-        {{ form.country.label_tag }} {{ form.country }}
-        {{ form.pincode.label_tag }} {{ form.pincode }}
-        {{ form.address.label_tag }} {{ form.address }}
-        <input type="submit" value="Register">
-    </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-container">
+            <h2>Create account</h2>
+            <p class="subtitle">Fill in your details to get started</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.username.label_tag }} {{ form.username }}
+                {{ form.password.label_tag }} {{ form.password }}
+                {{ form.email.label_tag }} {{ form.email }}
+                {{ form.first_name.label_tag }} {{ form.first_name }}
+                {{ form.last_name.label_tag }} {{ form.last_name }}
+                {{ form.dob.label_tag }} {{ form.dob }}
+                {{ form.city.label_tag }} {{ form.city }}
+                {{ form.country.label_tag }} {{ form.country }}
+                {{ form.pincode.label_tag }} {{ form.pincode }}
+                {{ form.address.label_tag }} {{ form.address }}
+                <input type="submit" value="Register">
+            </form>
+            <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
 </div>
 {% endblock %}
