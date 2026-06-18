@@ -23,21 +23,25 @@ A Django-based ticket management system with role-based access for admins and re
 - **Auth:** Django built-in authentication
 
 ## Project Structure
-PP/
-├── core/                          → Django settings, root URLs, wsgi
-├── tickets/                       → Ticket management app
-│   ├── templates/                 → Ticket-related HTML templates
-│   └── static/tickets/            → Ticket-specific CSS
-├── account/                       → User auth and profile app
-│   ├── templates/                 → Auth/profile HTML templates
-│   └── static/account/            → Account-specific CSS and JS
-└── templates/                     → Shared base template (base.html)
+```text
+├── core/                     # Django settings, root URLs, WSGI
+├── tickets/                  # Ticket management app
+│   ├── templates/            # Ticket-related HTML templates
+│   └── static/
+│       └── tickets/          # Ticket-specific CSS
+├── account/                  # User authentication and profile app
+│   ├── templates/            # Authentication/profile HTML templates
+│   └── static/
+│       └── account/          # Account-specific CSS and JS
+└── templates/                # Shared base template (base.html)
+```
+
 ## Setup & Installation
 
 ### 1. Clone the repository
 ```bash
 git clone <your-repo-url>
-cd PP
+
 ```
 
 ### 2. Create and activate virtual environment
@@ -53,7 +57,7 @@ source venv/bin/activate
 
 ### 3. Install dependencies
 ```bash
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Set up environment variables
