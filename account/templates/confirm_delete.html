@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
-
 {% block title %}Confirm Deletion{% endblock %}
-
 {% block content %}
-<div class="confirm-delete-container">
-    <h2>Confirm Deletion</h2>
-    <p>Are you sure you want to delete the profile of
-       <strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong>?</p>
-
-    <form method="post">
-        {% csrf_token %}
-        <div class="button-group">
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="delete-container">
+            <h2>Are you sure?</h2>
+            <p>
+                {% if profile %}
+                    You're about to delete <strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong>'s account. This cannot be undone.
+                {% else %}
+                    You're about to permanently delete your account. This cannot be undone.
+                {% endif %}
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="button-group">
+                    <button type="submit" class="action-btn action-delete">Yes, Delete</button>
+                    <a href="{% url 'profile' %}" class="action-btn action-logout">Cancel</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 {% endblock %}

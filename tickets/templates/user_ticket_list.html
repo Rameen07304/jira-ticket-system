@@ -118,16 +118,17 @@
                     </form>
                 </td>
                 <td>
-                    <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="inline-form">
-                        {% csrf_token %}
-                        <select name="priority" class="form-select-sm">
-                            {% for val, name in form.fields.priority.choices %}
-                                <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit" class="btn-icon-update" onclick="return confirm('Update priority of this ticket?');" title="Update priority">&#10003;</button>
-                    </form>
-                </td>
+    <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="inline-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'user_ticket_list' %}">
+        <select name="priority" class="form-select-sm">
+            {% for val, name in form.fields.priority.choices %}
+                <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn-icon-update" onclick="return confirm('Update priority of this ticket?');" title="Update priority">&#10003;</button>
+    </form>
+</td>
                 <td class="text-muted-cell">{{ ticket.created_at|date:"M d, Y" }}</td>
                 <td class="text-muted-cell">{{ ticket.updated_at|date:"M d, Y" }}</td>
                 <td>

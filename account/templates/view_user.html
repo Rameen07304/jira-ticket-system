@@ -3,15 +3,54 @@
 {% block title %}User Profile Details{% endblock %}
 
 {% block content %}
-<div class="view-container">
-    <h2>User Profile Details</h2>
-    <p><strong>Name:</strong> {{ profile.user.first_name }} {{ profile.user.last_name }}</p>
-    <p><strong>Email:</strong> {{ profile.user.email }}</p>
-    <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
-    <p><strong>Address:</strong> {{ profile.address }}</p>
-    <p><strong>City:</strong> {{ profile.get_city_display }}</p>
-    <p><strong>Country:</strong> {{ profile.get_country_display }}</p>
-    <p><strong>Pincode:</strong> {{ profile.pincode }}</p>
-    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="profile-container">
+
+            <div class="profile-header">
+                <div class="profile-avatar">{{ profile.user.username|slice:":1"|upper }}</div>
+                <div>
+                    <h2 class="profile-name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+                    <p class="profile-username">@{{ profile.user.username }}</p>
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <div class="profile-grid">
+                <div class="profile-field">
+                    <span class="field-label">Email</span>
+                    <span class="field-value">{{ profile.user.email }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="field-label">Date of Birth</span>
+                    <span class="field-value">{{ profile.dob|default:"Not set" }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="field-label">City</span>
+                    <span class="field-value">{{ profile.get_city_display|default:"Not set" }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="field-label">Country</span>
+                    <span class="field-value">{{ profile.get_country_display|default:"Not set" }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="field-label">Pincode</span>
+                    <span class="field-value">{{ profile.pincode|default:"Not set" }}</span>
+                </div>
+                <div class="profile-field profile-field-full">
+                    <span class="field-label">Address</span>
+                    <span class="field-value">{{ profile.address }}</span>
+                </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <div class="actions">
+                <a href="{% url 'home' %}" class="action-btn action-logout">Back to list</a>
+            </div>
+
+        </div>
+    </div>
 </div>
 {% endblock %}

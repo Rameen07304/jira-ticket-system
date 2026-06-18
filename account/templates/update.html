@@ -4,38 +4,58 @@
 {% block title %}Update Profile{% endblock %}
 
 {% block content %}
-<h2>Update Profile</h2>
-<form id="updateForm" method="post" data-url="{% url 'update_profile_ajax' %}">
-    {% csrf_token %}
-    <p><strong>Username:</strong> <input type="text" value="{{ user.username }}" disabled></p>
-    <p><strong>Email:</strong> <input type="email" value="{{ user.email }}" disabled></p>
-    <p>First Name: <input type="text" name="first_name" value="{{ user.first_name }}"></p>
-    <p>Last Name: <input type="text" name="last_name" value="{{ user.last_name }}"></p>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="form-container">
+            <h2>Update Profile</h2>
+            <p class="subtitle">Keep your information up to date</p>
 
-    {% if user.is_superuser %}
-        <p>New Password: <input type="password" name="password"></p>
-    {% else %}
-        <p>Date of Birth: <input type="date" name="dob" value="{{ profile.dob }}"></p>
-        <p>City:
-            <select name="city">
-                {% for code, label in profile.CITY_CHOICES %}
-                    <option value="{{ code }}" {% if code == profile.city %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <p>Country:
-            <select name="country">
-                {% for code, label in profile.COUNTRY_CHOICES %}
-                    <option value="{{ code }}" {% if code == profile.country %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <p>Pincode: <input type="text" name="pincode" value="{{ profile.pincode }}"></p>
-        <p>Address: <textarea name="address">{{ profile.address }}</textarea></p>
-    {% endif %}
-    <button type="submit" onclick="updateProfile(event)">Update</button>
-</form>
-<p id="message"></p>
+            <form id="updateForm" method="post" data-url="{% url 'update_profile_ajax' %}">
+                {% csrf_token %}
+                <label>Username</label>
+                <input type="text" value="{{ user.username }}" disabled>
 
-<script src="{% static 'account/js/update.js' %}"></script>
+                <label>Email</label>
+                <input type="email" value="{{ user.email }}" disabled>
+
+                <label>First Name</label>
+                <input type="text" name="first_name" value="{{ user.first_name }}">
+
+                <label>Last Name</label>
+                <input type="text" name="last_name" value="{{ user.last_name }}">
+
+                {% if user.is_superuser %}
+                    <label>New Password</label>
+                    <input type="password" name="password" placeholder="Leave blank to keep current password">
+                {% else %}
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" value="{{ profile.dob }}">
+
+                    <label>City</label>
+                    <select name="city">
+                        {% for code, label in profile.CITY_CHOICES %}
+                            <option value="{{ code }}" {% if code == profile.city %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Country</label>
+                    <select name="country">
+                        {% for code, label in profile.COUNTRY_CHOICES %}
+                            <option value="{{ code }}" {% if code == profile.country %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Pincode</label>
+                    <input type="text" name="pincode" value="{{ profile.pincode }}">
+
+                    <label>Address</label>
+                    <textarea name="address" rows="3">{{ profile.address }}</textarea>
+                {% endif %}
+
+                <button type="submit" onclick="updateProfile(event)" class="btn-primary-custom" style="width: 100%; margin-top: 8px;">Update</button>
+            </form>
+            <p id="message" style="margin-top: 12px; font-size: 0.875rem;"></p>
+        </div>
+    </div>
+</div>
 {% endblock %}

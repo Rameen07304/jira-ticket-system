@@ -67,6 +67,7 @@
                 <td>
                     <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="inline-form">
                         {% csrf_token %}
+                        <input type="hidden" name="next" value="{% url 'ticket_list' %}">
                         <select name="priority" class="form-select-sm">
                             {% for val, name in form.fields.priority.choices %}
                                 <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>

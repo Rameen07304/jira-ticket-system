@@ -121,55 +121,147 @@ body {
     margin: -10px 0 10px 0;
 }
 
-/* Profile Page */
+/* ===== PROFILE PAGE ===== */
 .profile-container {
     background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    text-align: left;
+    padding: 36px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.08);
+    margin: 40px auto;
 }
 
-.profile-container p {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-/* Profile Actions */
-.actions {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.actions a {
-    text-decoration: none;
-    padding: 8px 12px;
-    margin: 0 5px;
-    background-color: #0056b3;
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #4F46E5;
     color: white;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
-.actions a:hover {
-    background-color: #0056b3;
+.profile-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1E1B4B;
+    margin: 0;
 }
 
-.actions a:nth-child(2) {
-    background-color: #dc3545;
+.profile-username {
+    color: #6B7280;
+    font-size: 0.875rem;
+    margin: 2px 0 6px 0;
 }
 
-.actions a:nth-child(2):hover {
-    background-color: #b02a37;
+.role-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
-.actions a:nth-child(3) {
-    background-color: #6c757d;
+.role-admin {
+    background-color: #EEF2FF;
+    color: #4F46E5;
 }
 
-.actions a:nth-child(3):hover {
-    background-color: #565e64;
+.role-user {
+    background-color: #F3F4F6;
+    color: #6B7280;
+}
+
+.profile-divider {
+    height: 1px;
+    background-color: #E5E7EB;
+    margin: 24px 0;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.profile-field-full {
+    grid-column: 1 / -1;
+}
+
+.field-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.field-value {
+    font-size: 0.95rem;
+    color: #111827;
+    font-weight: 500;
+}
+
+.profile-empty-note {
+    color: #9CA3AF;
+    font-style: italic;
+    font-size: 0.875rem;
+    grid-column: 1 / -1;
+}
+
+/* ===== PROFILE ACTIONS ===== */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.action-edit {
+    background-color: #4F46E5;
+    color: white;
+}
+.action-edit:hover {
+    background-color: #4338CA;
+}
+
+.action-delete {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+.action-delete:hover {
+    background-color: #FECACA;
+}
+
+.action-logout {
+    background-color: #F3F4F6;
+    color: #374151;
+}
+.action-logout:hover {
+    background-color: #E5E7EB;
 }
 
 /* Delete Page */
@@ -368,4 +460,9 @@ a {
 
 .btn-danger:hover {
     background-color: #c82333;
+}
+.form-container .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
 }

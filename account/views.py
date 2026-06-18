@@ -7,7 +7,6 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.db import transaction
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 
@@ -141,7 +140,7 @@ def delete_profile(request):
         request.user.delete()
         messages.success(request, 'Profile deleted successfully.')
         return redirect('register')
-    return render(request, 'delete.html')
+    return render(request, 'confirm_delete.html', {'profile': None})
 
 def view_user(request, user_id):
     profile = get_object_or_404(CustomUser, user__id=user_id)
@@ -169,7 +168,6 @@ def edit_user(request, user_id):
     return render(request, 'edit_user.html', {'profile': profile})
 
 
-@csrf_exempt  
 def delete_user(request, user_id):
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)

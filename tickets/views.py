@@ -80,7 +80,6 @@ def update_ticket_status(request, ticket_id):
             messages.success(request, 'Status updated.')
     return redirect('user_ticket_list' if request.user.is_superuser else 'ticket_list')
 
-
 @login_required
 def update_ticket_priority(request, ticket_id):
     ticket = get_object_or_404(tickets, id=ticket_id)
@@ -95,15 +94,13 @@ def update_ticket_priority(request, ticket_id):
             ticket.save()
             messages.success(request, 'Priority updated.')
 
-        # Determine redirect based on referrer
-        referer = request.META.get('HTTP_REFERER', '')
-        if 'user_ticket_list' in referer:
-            return redirect('user_ticket_list')
-        else:
-            return redirect('ticket_list')
+        next_url = request.POST.get('next')
+        if next_url:
+            return redirect(next_url)
 
-    # Default redirect if not POST
     return redirect('user_ticket_list' if request.user.is_superuser else 'ticket_list')
+
+@login_required
 def user_ticket_list(request):
     if not request.user.is_superuser:
         return redirect('ticket_list')  
