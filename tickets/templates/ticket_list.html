@@ -2,84 +2,92 @@
 {% block title %}Tickets{% endblock %}
 
 {% block content %}
-<h2>Add Tickets</h2>
+<div class="dashboard-header">
+    <h2>My Tickets</h2>
+    <p class="dashboard-subtitle">Create and manage your support tickets</p>
+</div>
 
 <!-- Add Ticket Form -->
-<form method="post" class="mb-4 border p-3 rounded bg-light">
-    {% csrf_token %}
-    <div class="mb-2">
-        <label>Subject</label>
-        <input type="text" name="subject" class="form-control" required>
-    </div>
-    <div class="mb-2">
-        <label>Description</label>
-        <textarea name="description" class="form-control" required></textarea>
-    </div>
-    <div class="mb-2">
-        <label>Status</label>
-        {{ form.status }}
-    </div>
-    <div class="mb-2">
-        <label>Priority</label>
-        {{ form.priority}}
-    </div>
-    <button type="submit" name="add_ticket" class="btn btn-success">Add Ticket</button>
-</form>
-<h2>Backlog</h2>
-<!-- Ticket Table -->
-<table class="table table-bordered table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>Subject</th>
-            <th>Description</th>
-            <th>Status</th>
-             <th>Priority</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for ticket in tickets %}
-        <tr>
-            <td>{{ ticket.subject }}</td>
-            <td>{{ ticket.description }}</td>
-            <td>
-                <!-- Update status form -->
-                <form method="post" action="{% url 'update_ticket_status' ticket.id %}" class="d-flex">
-                    {% csrf_token %}
-                    <select name="status" class="form-select me-2">
-                        {% for val, name in form.fields.status.choices %}
-                            <option value="{{ val }}" {% if ticket.status == val %}selected{% endif %}>{{ name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit" class="btn btn-sm btn-dark"onclick="return confirm('Are you sure you want to update the status of  this ticket?');">Update</button>
-                </form>
-            </td>
-            <td>
-    <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="d-flex">
+<div class="panel mb-4">
+    <h5 class="panel-title">New Ticket</h5>
+    <form method="post">
         {% csrf_token %}
-        <select name="priority" class="form-select me-2">
-            {% for val, name in form.fields.priority.choices %}
-                <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>
-            {% endfor %}
-        </select>
-                    <button type="submit" class="btn btn-sm btn-dark"onclick="return confirm('Are you sure you want to update the priority of  this ticket?');">Update</button>
+        <div class="mb-3">
+            <label>Subject</label>
+            <input type="text" name="subject" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Description</label>
+            <textarea name="description" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Status</label>
+                {{ form.status }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Priority</label>
+                {{ form.priority }}
+            </div>
+        </div>
+        <button type="submit" name="add_ticket" class="btn-primary-custom">Add Ticket</button>
     </form>
-</td>
-            <td>{{ ticket.created_at|date:"Y-m-d H:i" }}</td>
-            <td>{{ ticket.updated_at|date:"Y-m-d H:i" }}</td>
-            <td>
-                <!-- Delete button -->
-                <form method="post" action="{% url 'delete_ticket' ticket.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-    {% empty %}
-        <tr><td colspan="6" class="text-center">No tickets found.</td></tr>
-    {% endfor %}
-    </tbody>
-</table>
+</div>
+
+<h5 class="panel-title">Backlog</h5>
+<div class="table-wrapper">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td class="fw-semibold">{{ ticket.subject }}</td>
+                <td class="text-muted-cell">{{ ticket.description|truncatechars:40 }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_ticket_status' ticket.id %}" class="inline-form">
+                        {% csrf_token %}
+                        <select name="status" class="form-select-sm">
+                            {% for val, name in form.fields.status.choices %}
+                                <option value="{{ val }}" {% if ticket.status == val %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn-icon-update" onclick="return confirm('Update status of this ticket?');" title="Update status">&#10003;</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'update_ticket_priority' ticket.id %}" class="inline-form">
+                        {% csrf_token %}
+                        <select name="priority" class="form-select-sm">
+                            {% for val, name in form.fields.priority.choices %}
+                                <option value="{{ val }}" {% if ticket.priority == val %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn-icon-update" onclick="return confirm('Update priority of this ticket?');" title="Update priority">&#10003;</button>
+                    </form>
+                </td>
+                <td class="text-muted-cell">{{ ticket.created_at|date:"M d, Y" }}</td>
+                <td class="text-muted-cell">{{ ticket.updated_at|date:"M d, Y" }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_ticket' ticket.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-icon-delete" onclick="return confirm('Delete this ticket?');" title="Delete">&#128465;</button>
+                    </form>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="7" class="text-center text-muted-cell py-4">No tickets found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

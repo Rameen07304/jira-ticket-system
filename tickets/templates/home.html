@@ -4,48 +4,52 @@
 {% block title %}User List{% endblock %}
 
 {% block content %}
-
-<h2><strong>User Details</strong></h2>
+<div class="dashboard-header">
+    <h2>User Details</h2>
+    <p class="dashboard-subtitle">Manage all registered users</p>
+</div>
 
 <form method="get" class="search-bar">
-    <input type="text" name="search" value="{{ query }}" placeholder="Search...">
+    <input type="text" name="search" value="{{ query }}" placeholder="Search by name...">
     <button type="submit">Search</button>
 </form>
 
-<table class="custom-table"> 
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>Pin Code</th>
-            <th>Country</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in page_obj %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ item.user.first_name }} {{ item.user.last_name }}</td>
-            <td>{{ item.address }}</td>
-            <td>{{ item.get_city_display }}</td>
-            <td>{{ item.pincode }}</td>
-            <td>{{ item.get_country_display }}</td>
-            <td class="action-icons">
-                <a href="{% url 'view_user' item.user.id %}" class="view">&#128065;</a>
-                <a href="{% url 'edit_user' item.user.id %}" class="edit">&#9998;</a>
-                <a href="{% url 'delete_user' item.user.id %}" class="delete">&#128465;</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="7">No users found.</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="table-wrapper">
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Pin Code</th>
+                <th>Country</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in page_obj %}
+            <tr>
+                <td class="text-muted-cell">{{ forloop.counter }}</td>
+                <td class="fw-semibold">{{ item.user.first_name }} {{ item.user.last_name }}</td>
+                <td class="text-muted-cell">{{ item.address }}</td>
+                <td>{{ item.get_city_display }}</td>
+                <td class="text-muted-cell">{{ item.pincode }}</td>
+                <td>{{ item.get_country_display }}</td>
+                <td class="action-icons">
+                    <a href="{% url 'view_user' item.user.id %}" class="action-icon view" title="View">&#128065;</a>
+                    <a href="{% url 'edit_user' item.user.id %}" class="action-icon edit" title="Edit">&#9998;</a>
+                    <a href="{% url 'delete_user' item.user.id %}" class="action-icon delete" title="Delete">&#128465;</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" class="text-center text-muted-cell py-4">No users found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-<p style="margin-top: 10px; font-size: 14px; color: #555;">
+<p class="pagination-info">
     Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} out of {{ page_obj.paginator.count }} users
 </p>
 
