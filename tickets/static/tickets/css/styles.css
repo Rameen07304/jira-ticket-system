@@ -433,3 +433,60 @@
 .btn-icon-delete:hover {
     background-color: #FECACA;
 }
+/* ===== STATS CARDS ===== */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-left: 3px solid #4F46E5;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1E1B4B;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.stat-todo {
+    border-left-color: #6366F1;
+}
+
+.stat-progress {
+    border-left-color: #F59E0B;
+}
+
+.stat-done {
+    border-left-color: #10B981;
+}
+
+@media (max-width: 768px) {
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.overdue-badge {
+    color: #DC2626;
+    font-weight: 600;
+}
+.ticket-due {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    margin: 4px 0 0 0;
+}

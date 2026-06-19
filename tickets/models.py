@@ -19,7 +19,15 @@ class tickets(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='To Do')
     priority = models.CharField(max_length=20, choices=priority_choices, default='Low')
+    due_date = models.DateField(null=True, blank=True)  # ← add this
 
     def __str__(self):
         return f"{self.subject} - {self.user.username}"
+    
+    @property
+    def is_overdue(self):
+        from django.utils import timezone
+        if self.due_date and self.status != 'Done':
+            return self.due_date < timezone.now().date()
+        return False
     

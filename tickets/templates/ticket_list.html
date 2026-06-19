@@ -29,6 +29,10 @@
                 <label>Priority</label>
                 {{ form.priority }}
             </div>
+            <div class="col-md-4 mb-3">
+        <label>Due Date</label>
+        {{ form.due_date }}
+    </div>
         </div>
         <button type="submit" name="add_ticket" class="btn-primary-custom">Add Ticket</button>
     </form>
@@ -44,8 +48,10 @@
                 <th>Status</th>
                 <th>Priority</th>
                 <th>Created</th>
+                <th>Due Date</th>
                 <th>Updated</th>
                 <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -77,6 +83,16 @@
                     </form>
                 </td>
                 <td class="text-muted-cell">{{ ticket.created_at|date:"M d, Y" }}</td>
+                <td>
+    {% if ticket.due_date %}
+        <span class="{% if ticket.is_overdue %}overdue-badge{% endif %}">
+            {{ ticket.due_date|date:"M d, Y" }}
+            {% if ticket.is_overdue %} (Overdue){% endif %}
+        </span>
+    {% else %}
+        <span class="text-muted-cell">—</span>
+    {% endif %}
+</td>
                 <td class="text-muted-cell">{{ ticket.updated_at|date:"M d, Y" }}</td>
                 <td>
                     <form method="post" action="{% url 'delete_ticket' ticket.id %}">
@@ -86,7 +102,7 @@
                 </td>
             </tr>
         {% empty %}
-            <tr><td colspan="7" class="text-center text-muted-cell py-4">No tickets found.</td></tr>
+            <tr><td colspan="8" class="text-center text-muted-cell py-4">No tickets found.</td></tr>
         {% endfor %}
         </tbody>
     </table>

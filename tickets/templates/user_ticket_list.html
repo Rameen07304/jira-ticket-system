@@ -12,12 +12,12 @@
     <h5 class="panel-title">Filters</h5>
     <form method="get" class="row g-2">
         <div class="col-md-4">
-            <select name="username" class="form-select-sm w-100">
-                <option value="" disabled selected>Select a user</option>
-                {% for user in users %}
-                    <option value="{{ user.username }}">{{ user.username }}</option>
-                {% endfor %}
-            </select>
+           <select name="username" class="form-select-sm w-100">
+    <option value="" {% if not username_filter %}selected{% endif %}>All Users</option>
+    {% for user in users %}
+        <option value="{{ user.username }}" {% if username_filter == user.username %}selected{% endif %}>{{ user.username }}</option>
+    {% endfor %}
+</select>
         </div>
         <div class="col-md-3">
             <select name="status" class="form-select-sm w-100">
@@ -79,6 +79,10 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="col-md-2">
+            <label>Due Date</label>
+             {{ form.due_date }}
+            </div>
         <div class="col-md-1">
             <button type="submit" name="add_ticket" class="btn-primary-custom w-100">Add</button>
         </div>
@@ -97,6 +101,7 @@
                 <th>Priority</th>
                 <th>Created</th>
                 <th>Updated</th>
+                <th>Due Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -130,7 +135,17 @@
     </form>
 </td>
                 <td class="text-muted-cell">{{ ticket.created_at|date:"M d, Y" }}</td>
-                <td class="text-muted-cell">{{ ticket.updated_at|date:"M d, Y" }}</td>
+<td class="text-muted-cell">{{ ticket.updated_at|date:"M d, Y" }}</td>
+<td>
+    {% if ticket.due_date %}
+        <span class="{% if ticket.is_overdue %}overdue-badge{% endif %}">
+            {{ ticket.due_date|date:"M d, Y" }}
+            {% if ticket.is_overdue %} (Overdue){% endif %}
+        </span>
+    {% else %}
+        <span class="text-muted-cell">—</span>
+    {% endif %}
+</td>
                 <td>
                     <form method="post" action="{% url 'delete_ticket' ticket.id %}">
                         {% csrf_token %}
@@ -140,7 +155,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="8" class="text-center text-muted-cell py-4">No tickets found.</td>
+                <td colspan="9" class="text-center text-muted-cell py-4">No tickets found.</td>
             </tr>
             {% endfor %}
         </tbody>
