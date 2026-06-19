@@ -42,7 +42,7 @@ A Django-based ticket management system with role-based access for admins and re
 
 ### 1. Clone the repository
 ```bash
-git clone <https://github.com/Rameen07304/jira-ticket-system.git>
+git clone https://github.com/Rameen07304/jira-ticket-system.git
 
 ```
 
