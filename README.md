@@ -1,4 +1,4 @@
-# JIRA Ticket Management System
+# TicketFlow-Ticket Management System
 
 A Django-based ticket management system with role-based access for admins and regular users.
 
